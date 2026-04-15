@@ -264,136 +264,72 @@ input[type="file"] {
                       alt="Rise-Up Bible Church Logo"
                       className="w-16 h-16 rounded-lg shadow-sm border border-border/50"
                     />
-                  </div>
+                  <style dangerouslySetInnerHTML={{__html: css}} />
 
-                  <form onSubmit={handleSubmit} className="space-y-8">
-                    {/* Name Fields */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div>
-                        <label className="block text-sm font-semibold text-secondary mb-3">
-                          First Name <span className="text-primary">*</span>
-                        </label>
-                        <input
-                          type="text"
-                          name="firstName"
-                          value={formData.firstName}
-                          onChange={handleInputChange}
-                          placeholder="Enter your first name"
-                          className={`w-full px-4 py-3 rounded-lg border-2 transition-colors font-medium ${
-                            errors.firstName
-                              ? 'border-red-500 bg-red-50'
-                              : 'border-border/50 focus:border-primary focus:outline-none'
-                          }`}
-                        />
-                        {errors.firstName && (
-                          <p className="text-red-600 text-sm mt-2 flex items-center gap-1">
-                            <AlertCircle size={16} /> {errors.firstName}
-                          </p>
-                        )}
-                      </div>
-                      <div>
-                        <label className="block text-sm font-semibold text-secondary mb-3">
-                          Last Name <span className="text-primary">*</span>
-                        </label>
-                        <input
-                          type="text"
-                          name="lastName"
-                          value={formData.lastName}
-                          onChange={handleInputChange}
-                          placeholder="Enter your last name"
-                          className={`w-full px-4 py-3 rounded-lg border-2 transition-colors font-medium ${
-                            errors.lastName
-                              ? 'border-red-500 bg-red-50'
-                              : 'border-border/50 focus:border-primary focus:outline-none'
-                          }`}
-                        />
-                        {errors.lastName && (
-                          <p className="text-red-600 text-sm mt-2 flex items-center gap-1">
-                            <AlertCircle size={16} /> {errors.lastName}
-                          </p>
-                        )}
-                      </div>
+                  <form action="https://formsubmit.co/rubcosizweni.office@gmail.com" method="POST" encType="multipart/form-data">
+
+                    <input type="text" name="_honey" style={{display: 'none'}} />
+
+                    <input type="hidden" name="_captcha" value="false" />
+
+                    <input type="hidden" name="_subject" value="New Gala Dinner Reservation" />
+
+                    <div className="form-group">
+
+                      <label htmlFor="name">Name and Surname</label>
+
+                      <input type="text" id="name" name="Full_Name" placeholder="Enter your full name" required />
+
                     </div>
 
-                    {/* Ticket Type */}
-                    <div>
-                      <label className="block text-sm font-semibold text-secondary mb-3">
-                        Ticket Type <span className="text-primary">*</span>
-                      </label>
-                      <select
-                        name="ticketType"
-                        value={formData.ticketType}
-                        onChange={handleInputChange}
-                        className="w-full px-4 py-3 rounded-lg border-2 border-border/50 focus:border-primary focus:outline-none font-medium text-secondary bg-white cursor-pointer transition-colors"
-                      >
-                        {ticketTypes.map(type => (
-                          <option key={type.id} value={type.id}>
-                            {type.label}
-                          </option>
-                        ))}
+                    <div className="form-group">
+
+                      <label htmlFor="email">Email Address</label>
+
+                      <input type="email" id="email" name="Email" placeholder="name@example.com" required />
+
+                    </div>
+
+                    <div className="form-group">
+
+                      <label htmlFor="ticket">Type of Ticket</label>
+
+                      <select id="ticket" name="Ticket_Type" required>
+
+                        <option value="" disabled selected>Select ticket category</option>
+
+                        <option value="General">General</option>
+
+                        <option value="VIP">VIP</option>
+
+                        <option value="VVIP">VVIP</option>
+
                       </select>
-                      <p className="text-sm text-muted-foreground mt-2">
-                        Selected: {currentTicket?.label}
-                      </p>
+
                     </div>
 
-                    {/* File Upload */}
-                    <div>
-                      <label className="block text-sm font-semibold text-secondary mb-3">
-                        Proof of Payment <span className="text-primary">*</span>
-                      </label>
-                      <div className={`relative border-3 border-dashed rounded-lg p-8 text-center transition-colors ${
-                        errors.proofOfPayment
-                          ? 'border-red-500 bg-red-50'
-                          : 'border-primary/30 hover:border-primary/60 bg-primary/5'
-                      }`}>
-                        <input
-                          type="file"
-                          accept=".jpg,.jpeg,.png,.gif,.pdf"
-                          onChange={handleFileChange}
-                          className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                        />
-                        <div className="flex flex-col items-center gap-3">
-                          <Upload size={32} className={`${errors.proofOfPayment ? 'text-red-500' : 'text-primary'}`} />
-                          <div>
-                            <p className="font-semibold text-secondary">
-                              {fileName ? fileName : 'Click to upload or drag and drop'}
-                            </p>
-                            {!fileName && (
-                              <p className="text-sm text-muted-foreground mt-1">
-                                JPG, PNG, GIF or PDF (Max 5MB)
-                              </p>
-                            )}
-                          </div>
-                        </div>
-                      </div>
-                      {errors.proofOfPayment && (
-                        <p className="text-red-600 text-sm mt-2 flex items-center gap-1">
-                          <AlertCircle size={16} /> {errors.proofOfPayment}
-                        </p>
-                      )}
+                    <div className="form-group">
+
+                      <label htmlFor="payment">Proof of Payment (Upload Image)</label>
+
+                      <input type="file" id="payment" name="Proof_of_Payment" accept="image/*" required />
+
                     </div>
 
-                    {/* General Form Error */}
-                    {errors.submit && (
-                      <div className="p-4 rounded-lg bg-red-50 border-2 border-red-200">
-                        <p className="text-red-600 font-medium flex items-center gap-2">
-                          <AlertCircle size={18} />
-                          {errors.submit}
-                        </p>
-                      </div>
-                    )}
+                    <button type="submit" className="submit-btn">Submit Reservation</button>
 
-                    {/* Submit Button */}
-                    <button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="w-full py-4 rounded-lg bg-primary text-white font-semibold text-lg hover:bg-primary/90 transition-colors duration-300 shadow-sm hover:shadow-md disabled:bg-gray-400 disabled:cursor-not-allowed"
-                    >
-                      {isSubmitting ? 'Submitting...' : 'Complete Registration'}
-                    </button>
+                    <p className="note">
+
+                      By submitting, your data will be sent to the church office. 
+
+                      Please allow 24-48 hours for payment verification.
+
+                    </p>
+
                   </form>
+
                 </div>
+
               </div>
 
               {/* Payment Instructions & Summary */}
