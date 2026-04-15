@@ -110,9 +110,10 @@ export default function TicketForm() {
           formDataToSend.append('proofOfPayment', formData.proofOfPayment);
         }
         
-        // Send to backend server
-        const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3001';
-        const response = await fetch(`${apiUrl}/api/submit-ticket`, {
+        // Send to backend server. Use a relative /api path when VITE_API_URL is not configured.
+        const apiUrl = import.meta.env.VITE_API_URL || '';
+        const submitUrl = apiUrl ? `${apiUrl}/api/submit-ticket` : '/api/submit-ticket';
+        const response = await fetch(submitUrl, {
           method: 'POST',
           body: formDataToSend
         });
