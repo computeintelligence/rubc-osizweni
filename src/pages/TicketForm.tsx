@@ -29,12 +29,68 @@ export default function TicketForm() {
     { id: 'general', label: 'General - R250', price: 250 },
   ];
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
+const css = `/* Logo Colors */
+:root {
+  --rise-orange: #FF5C00;
+  --rise-black: #000000;
+  --rise-white: #ffffff;
+  --light-grey: #f4f4f4;
+}
+.form-group {
+  margin-bottom: 20px;
+}
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: var(--rise-black);
+  font-size: 14px;
+}
+input[type="text"],
+input[type="email"],
+select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  background: var(--rise-white);
+  border-radius: 4px;
+  color: var(--rise-black);
+  box-sizing: border-box;
+  transition: border-color 0.3s;
+}
+input:focus, select:focus {
+  outline: none;
+  border-color: var(--rise-orange);
+}
+input[type="file"] {
+  font-size: 13px;
+  color: #666;
+}
+.submit-btn {
+  width: 100%;
+  padding: 15px;
+  background: var(--rise-orange);
+  border: none;
+  border-radius: 4px;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin-top: 10px;
+}
+.submit-btn:hover {
+  background: var(--rise-black);
+}
+.note {
+  font-size: 12px;
+  text-align: center;
+  margin-top: 20px;
+  color: #777;
+  line-height: 1.4;
+}`;
+
     if (errors[name]) {
       setErrors(prev => ({
         ...prev,
