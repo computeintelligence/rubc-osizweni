@@ -93,23 +93,23 @@ export default function TicketForm() {
     e.preventDefault();
     
     if (validateForm()) {
-      // Send email notification about ticket purchase
+      // Submit via FormSubmit
       try {
         const formDataToSend = new FormData();
         formDataToSend.append('firstName', formData.firstName);
         formDataToSend.append('lastName', formData.lastName);
         formDataToSend.append('ticketType', formData.ticketType);
         formDataToSend.append('price', currentTicket?.price.toString() || '0');
+        formDataToSend.append('_subject', 'New Gala Dinner Ticket Registration');
+        formDataToSend.append('_captcha', 'false');
         if (formData.proofOfPayment) {
           formDataToSend.append('proofOfPayment', formData.proofOfPayment);
         }
         
-        // Send to your email service endpoint
-        await fetch('/api/send-ticket-email', {
+        // Send to FormSubmit service
+        await fetch('https://formsubmit.co/rubcosizweni.office@gmail.com', {
           method: 'POST',
           body: formDataToSend
-        }).catch(() => {
-          // Fail silently if no backend - app still works
         });
       } catch (error) {
         // Continue regardless of email service

@@ -176,7 +176,7 @@ export default function Home() {
                     </div>
                   </div>
                   <div className="md:col-span-3 p-10">
-                    <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+                    <form className="space-y-6" action="https://formsubmit.co/rubcosizweni.office@gmail.com" method="POST">
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div className="space-y-2">
                           <label className="text-sm font-medium text-secondary">First Name</label>
@@ -195,37 +195,10 @@ export default function Home() {
                         <label className="text-sm font-medium text-secondary">Your Message</label>
                         <textarea required name="message" rows={4} className="w-full px-4 py-3 rounded-lg border-2 border-border bg-background focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all resize-none" placeholder="How can we help you?"></textarea>
                       </div>
+                      <input type="hidden" name="_subject" value="New Contact Form Submission" />
+                      <input type="hidden" name="_captcha" value="false" />
                       <button 
                       type="submit" 
-                      onClick={(e) => {
-                        e.preventDefault();
-                        const formElement = (e.target as HTMLElement).closest('form');
-                        if (formElement) {
-                          const formData = new FormData(formElement);
-                          const data = {
-                            firstName: formData.get('firstName'),
-                            lastName: formData.get('lastName'),
-                            email: formData.get('email'),
-                            message: formData.get('message'),
-                            type: 'contact'
-                          };
-                          
-                          // Send to backend
-                          fetch('/api/send-contact-email', {
-                            method: 'POST',
-                            headers: {
-                              'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify(data)
-                          }).catch(() => {
-                            // Fail silently if no backend
-                          });
-                          
-                          // Show success message
-                          alert('Thank you for your message! We will get back to you within 24 hours.');
-                          formElement.reset();
-                        }
-                      }}
                       className="w-full py-4 rounded-[28px] bg-primary text-white font-bold text-lg hover:bg-primary/90 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 mt-4">
                         Send Message
                       </button>
