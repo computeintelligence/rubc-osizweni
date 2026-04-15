@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { X } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 const css = `/* Logo Colors */
 :root {
@@ -92,6 +92,28 @@ input[type="file"] {
 export default function TicketForm() {
   const navigate = useNavigate();
 
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch(form.action, {
+        method: form.method,
+        body: formData,
+      });
+
+      if (response.ok) {
+        // Refresh the page after successful submission
+        window.location.reload();
+      } else {
+        alert('There was an error submitting your reservation. Please try again.');
+      }
+    } catch (error) {
+      alert('There was an error submitting your reservation. Please try again.');
+    }
+  };
+
   return (
     <main className="flex-grow pt-20">
       <div className="w-full bg-gradient-to-b from-primary/5 to-transparent min-h-screen pb-24">
@@ -135,7 +157,7 @@ export default function TicketForm() {
                     />
                   </div>
                   <style dangerouslySetInnerHTML={{ __html: css }} />
-                  <form action="https://formsubmit.co/rubcosizweni.office@gmail.com" method="POST" encType="multipart/form-data">
+                  <form id="ticketForm" action="https://formsubmit.co/rubcosizweni.office@gmail.com" method="POST" encType="multipart/form-data" onSubmit={handleSubmit}>
                     <input type="text" name="_honey" style={{ display: 'none' }} />
                     <input type="hidden" name="_captcha" value="false" />
                     <input type="hidden" name="_subject" value="New Gala Dinner Reservation" />
