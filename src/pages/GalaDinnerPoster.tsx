@@ -36,15 +36,15 @@ export default function GalaDinnerPoster() {
         <div className="flex justify-center mb-8">
           <div
             ref={posterRef}
-            className="relative w-full max-w-2xl aspect-[9/12] bg-gradient-to-br from-primary via-primary/80 to-secondary/90 rounded-2xl overflow-hidden shadow-2xl"
+            className="relative w-full max-w-2xl aspect-[9/12] bg-gradient-to-br from-primary via-primary/80 to-secondary/90 rounded-2xl overflow-hidden shadow-2xl 2xl max-h-screen object-cover"
+            style={{
+              backgroundImage: 'url(/images/gala-dinner-poster.jpg)',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center'
+            }}
           >
-            {/* Decorative Elements */}
-            <div className="absolute inset-0">
-              {/* Top Pattern */}
-              <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -mr-32 -mt-32"></div>
-              {/* Bottom Pattern */}
-              <div className="absolute bottom-0 left-0 w-72 h-72 bg-white/10 rounded-full blur-3xl -ml-36 -mb-36"></div>
-            </div>
+            {/* Overlay */}
+            <div className="absolute inset-0 bg-black/40"></div>
 
             {/* Content */}
             <div className="relative h-full flex flex-col items-center justify-between p-8 md:p-12 text-white text-center">

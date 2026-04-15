@@ -184,9 +184,12 @@ export default function Events() {
                           Get Tickets Now
                         </Link>
                       )}
-                      <Link to="/gala-poster" className="block w-full py-3 px-4 rounded-xl bg-secondary text-white font-semibold text-center hover:bg-secondary/90 transition-colors duration-300">
-                        View Poster
-                      </Link>
+                      <button className="block w-full py-3 px-4 rounded-xl bg-secondary text-white font-semibold text-center hover:bg-secondary/90 transition-colors duration-300" onClick={() => {
+                        const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(event.title)}&dates=20260625T180000Z/20260625T220000Z&location=${encodeURIComponent(event.fullLocation)}&details=${encodeURIComponent(event.description)}`;
+                        window.open(googleCalendarUrl, '_blank');
+                      }}>
+                        Add to Calendar
+                      </button>
                     </div>
                   </div>
                 </div>
